@@ -1,47 +1,68 @@
 ---
+title: Домашняя страница
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Карточка сервиса: **Навигатор знаний**
 
-Let's discover **Docusaurus in less than 5 minutes**.
+:::info
+**Навигатор знаний** — это онлайн платформа для связи репетиторов и учеников. Отличительной чертой платформы является подход к подбору преподавателя. У репетитора будет возможность создания расширенной версии личной страницы, на которой он сможет презентовать свой уникальный стиль обучения. Также платформа не будет взымать огромную комиссию за проведение занятий, а будет работать по принципу подписки. Таким образом, потенциальные ученики смогут подобрать себе близкого по духу и формату преподавания репетитора, а преподаватели получат площадку для прокачки личного бренда и выгодные условия.
+:::
 
-## Getting Started
+---
 
-Get started by **creating a new site**.
+## Основные функциональные возможности
+Преподаватель может:
+- Зарегестрироваться на платформе. 
+- Оформть и управлять подпиской сервиса. 
+- Заполнить основную информацию о себе, видах и стоимости образовательных услуг. 
+- Создать персонализированную страницу.
+- Добавить примеры уроков, характеризующие его стиль преподавания. 
+- Создать базу знаний, доступную для учеников бесплатно или по подписке. 
+- Управлять расписанием занятий.
+- Общаться с учениками во встроенном чате.
+- Проводить онлайн-занятия на базе платформы.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+---
 
-### What you'll need
+## Архитектура
+- **Тип**: Модульный монолит.
+- **Технологии**:
+  - **Backend**: C#, PostgreSQL, Redis, RabbitMQ.
+  - **Frontend**: React.
+  - **Мобильное приложение**: React Native.
+  - **API**: RESTful API для взаимодействия с клиентскими приложениями.
+  - **Хостинг**: Yandex Cloud, S3 для хранения изображений и данных.
+  
+---
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+## Статус сервиса
+- **Текущая версия**: 1.1.0
+- **Дата последнего обновления**: 2024-12-01
+- **Режим работы**: 24/7
+- **Доступность**: 99.9% Uptime (ежемесячная статистика).
 
-## Generate a new site
+---
 
-Generate a new Docusaurus site using the **classic template**.
+## Логи
+- Логи работы сервиса и ошибок можно просматривать по следующему адресу:
+  - [Логи сервиса](https://logs.SAproject.com)
+  
+- Используемая система для логирования: **ElasticSearch** с Grafana для визуализации.
 
-The classic template will automatically be added to your project after you run the command:
+---
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+## Метрики
+- **Метрики производительности**:
+  - Время отклика API: среднее — 120 ms, пик — 500 ms.
+  - Время загрузки страницы: среднее — 2.5 секунды.
+  - Ошибки запросов: `< 1%`  
+- Метрики можно отслеживать через [систему мониторинга](https://metrics.SAproject.com).
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+---
 
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+## Контакты команды
+- **Разработчики**: devs@SAproject.com
+- **Поддержка клиентов**: support@SAproject.com
+- **Вопросы по безопасности**: security@SAproject.com
+- **Контакты для партнёрства**: partners@SAproject.com
