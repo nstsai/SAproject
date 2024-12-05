@@ -1,0 +1,206 @@
+openapi: 3.0.2
+info:
+  title: Subscription API
+  description: >-
+    API процесса оформления подписки. Позволяет посмотреть список доступных для
+    оформления подписок и перейти к оплате выбранного варианта
+  version: '1.0'
+servers:
+  - url: https://api.server.test/v1
+security:
+  - bearerAuth: []
+tags:
+  - name: subscriptions
+    description: Информация о подписке
+  - name: payments
+    description: Оплата подписки
+paths:
+  /subscriptions:
+    get:
+      tags:
+        - subscriptions
+      summary: Получить список вариантов подписки
+      responses:
+        '200':
+          description: Список подписок получен
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subscription'
+        '404':
+          description: Страница не найдена
+        '500':
+          description: Внутренняя ошибка сервера
+  /subscriptions/{subscriptionId}:
+    get:
+      tags:
+        - subscriptions
+      summary: Выбрать тип подписки
+      description: >-
+        Пользователь нажимает кнопку "Выбрать подписку", чтобы далее
+        ознакомиться с ее подробными условиями
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: subscriptionId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Подписка успешно выбрана
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Subscription'
+                  - $ref: '#/components/schemas/SubscriptionStatus'
+        '404':
+          description: Указанная подписка не найдена
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Информация о выбранной подписке не найдена
+        '500':
+          description: Внутренняя ошибка сервера
+  /payments:
+    post:
+      summary: Оформление и оплата подписки
+      description: >-
+        Пользовтель нажал кнопку "Перейти к оплате". Система перенаправляет
+        пользователя во внешнюю платежную систему
+      security:
+        - bearerAuth: []
+      tags:
+        - payments
+      parameters:
+        - name: subscriptionId
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  format: uuid
+                subscriptionId:
+                  type: string
+      responses:
+        '302':
+          description: Переадресация на страницу оплаты
+          headers:
+            paymentAPI:
+              description: URL для перенаправления на платежный сервис
+              schema:
+                type: string
+                format: uri
+  /payments/{paymentId}:
+    get:
+      summary: Узнать статус платежа
+      description: Узнать о статусе оформления подписки после совершения платежа
+      security:
+        - bearerAuth: []
+      tags:
+        - payments
+      parameters:
+        - name: paymentId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: subscriptionId
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Подписка успешно оформлена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionStatus'
+        '404':
+          description: Страница не найдена
+        '408':
+          description: Время ожидания истекло
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Время ожидания запроса истекло. Пожалуйста, повторите попытку
+        '500':
+          description: Внутренняя ошибка сервера
+components:
+  schemas:
+    Subscription:
+      description: Подписка
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+          description: Уникальный идентификатор подписки
+          example: '12345'
+        name:
+          type: string
+          description: Название подписки
+          example: Базовая подписка
+        type:
+          type: string
+          description: Тип подписки
+          enum:
+            - Basic
+            - Pro
+            - Premium
+        price:
+          type: number
+          format: float
+          description: Цена подписки
+          example: 399.99
+        duration:
+          type: string
+          description: Длительность подписки (например, "1 месяц", "1 год")
+          example: 1 месяц
+    SubscriptionStatus:
+      description: Статус подписки, активирована или неактивирована
+      properties:
+        active:
+          type: boolean
+          example: true
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
