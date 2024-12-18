@@ -3,7 +3,6 @@ title: C4 dsl
 sidebar_position: 3
 ---
 
-
 workspace {
 
     model {
