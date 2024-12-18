@@ -1,6 +1,6 @@
 ---
 title: BPMN
-sidebar_position: 1
+sidebar_position: 4
 ---
 
 ### BPMN схема
