@@ -1,7 +1,0 @@
-position: 9 # для сортировки папки в сайдбаре
-label: UI # название пункта меню в сайдбаре
-collapsible: true
-collapsed: true
-link:
-  type: generated-index
-  title: UI # Заголовок на странице

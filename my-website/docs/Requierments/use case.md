@@ -1,6 +1,6 @@
 ---
 title: Use Case diagram
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # Use Case diagram

@@ -1,13 +1,13 @@
 ---
 title: BPMN
-sidebar_position: 4
+sidebar_position: 2
 ---
 
 ### BPMN схема
 
 В данном разделе описан бизнес-процесс функционала оформления подписки на сервис
 
-![alt text](image.png)
+![alt text](image_1.png)
 
 ### DMN таблица
 
