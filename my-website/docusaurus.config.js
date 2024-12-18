@@ -47,10 +47,6 @@ const config = {
             id: 'subscription',
             spec: 'api_specs/openapi.yaml',
           },
-          {
-            id: 'doc_verification',
-            spec: 'api_specs/asyncapi.yaml'
-          }
         ],
         theme: {
           primaryColor: '#1890ff',
