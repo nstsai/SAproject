@@ -58,7 +58,8 @@ const config = {
       {
         specs: [
           {
-            spec: "/path/to/asyncapi.yaml",
+            id: "async",
+            spec: "./api_specs/asyncapi.yaml",
             route: "/api_specs",
           },
         ],
