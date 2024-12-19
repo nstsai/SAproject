@@ -53,6 +53,24 @@ const config = {
         },
       }
     ],
+    [
+      "@jpitlor/docusaurus-preset-asyncapi",
+      {
+        specs: [
+          {
+            spec: "/path/to/asyncapi.yaml",
+            route: "/api_specs",
+          },
+        ],
+        // See defaults for ConfigInterface at:
+        // https://github.com/asyncapi/asyncapi-react/blob/master/library/src/config/default.ts
+        config: {
+          show: {
+            sidebar: true,
+          },
+        },
+      },
+    ],
   ],
 
   themeConfig:
